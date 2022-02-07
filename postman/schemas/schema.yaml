@@ -114,8 +114,8 @@ definitions:
         $ref: "#/definitions/ExternalDisclosure"
       groupDisclosure:
         $ref: "#/definitions/GroupDisclosure"
-      individualDisclosure:
-        $ref: "#/definitions/IndividualDisclosure"
+      IndividualDisclosureNew:
+        $ref: "#/definitions/IndividualDisclosureNew"
       internDisclosure:
         $ref: "#/definitions/InternDisclosure"
       legalForm:
@@ -450,7 +450,7 @@ definitions:
         type: "array"
         items:
           $ref: "#/definitions/ScoringResult"
-  IndividualDisclosureNew:
+  IndividualDisclosureNewNew:
     type: "object"
     properties:
       birthdate:
