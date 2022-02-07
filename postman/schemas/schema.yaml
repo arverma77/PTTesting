@@ -1,0 +1,640 @@
+---
+swagger: "2.0"
+info:
+  description: "API to invoke the execution of the decision service operation Scoring_FS_PT."
+  version: "1.0.0"
+  title: "Scoring_FS_PT API"
+host: "localhost:9090"
+basePath: "/DecisionService/rest"
+schemes:
+- "http"
+consumes:
+- "application/json"
+produces:
+- "application/json"
+paths:
+  /Scoring_FS_PT/Scoring_FS_PT:
+    post:
+      summary: "Invokes the execution of the decision service operation Scoring_FS_PT."
+      description: "Executes the decision service operation Scoring_FS_PT with the\
+        \ path /Scoring_FS_PT/Scoring_FS_PT."
+      operationId: "callScoring_FS_PTDecisionServiceOperation"
+      parameters:
+      - in: "body"
+        name: "Request"
+        description: "Request for the execution of the decision service operation.\
+          \ Contains notably the input parameters that are used for the execution."
+        required: true
+        schema:
+          $ref: "#/definitions/Request"
+      responses:
+        200:
+          description: "Response for the execution of the decision service operation.\
+            \ Contains notably the output parameters that are returned by the execution."
+          schema:
+            $ref: "#/definitions/Response"
+        default:
+          description: "Error occurring when invoking the execution of the decision\
+            \ service operation."
+          schema:
+            $ref: "#/definitions/Error"
+definitions:
+  RelatedCompany:
+    type: "object"
+    properties:
+      activeExposure:
+        type: "number"
+        format: "double"
+      affiliationType:
+        type: "number"
+        format: "double"
+      approvedExposure:
+        type: "number"
+        format: "double"
+      companyId:
+        type: "string"
+      companyIdType:
+        type: "string"
+      companyName:
+        type: "string"
+      countryId:
+        type: "string"
+      knownCustomerFlag:
+        type: "boolean"
+        default: false
+      oustandingExposure:
+        type: "number"
+        format: "double"
+  Address:
+    type: "object"
+    properties:
+      city:
+        type: "string"
+      countryCode:
+        type: "string"
+      provinceCode:
+        type: "string"
+      regionCode:
+        type: "string"
+      zipCode:
+        type: "string"
+  PreviousDecision:
+    type: "object"
+    properties:
+      additionalDecisionInfo:
+        type: "string"
+      conditions:
+        type: "array"
+        items:
+          $ref: "#/definitions/Conditioning"
+      decisionDate:
+        type: "string"
+        format: "date-time"
+      decisionCode:
+        type: "string"
+      decisonExpiryDate:
+        type: "string"
+        format: "date-time"
+  BusinessPartner:
+    type: "object"
+    properties:
+      addresses:
+        type: "array"
+        items:
+          $ref: "#/definitions/Address"
+      businessPartnerName:
+        type: "string"
+      companyDisclosure:
+        $ref: "#/definitions/CompanyDisclosure"
+      customerCategory:
+        type: "string"
+      customerId:
+        type: "string"
+      externDisclosure:
+        $ref: "#/definitions/ExternalDisclosure"
+      groupDisclosure:
+        $ref: "#/definitions/GroupDisclosure"
+      individualDisclosure:
+        $ref: "#/definitions/IndividualDisclosure"
+      internDisclosure:
+        $ref: "#/definitions/InternDisclosure"
+      legalForm:
+        type: "string"
+      legalName:
+        type: "string"
+      role:
+        type: "string"
+        enum:
+        - "MainApplicant"
+        - "CoApplicant"
+        - "Guarantor"
+  PDResult:
+    type: "object"
+    properties:
+      masterPD:
+        type: "number"
+        format: "double"
+      scoreCardVersion:
+        type: "string"
+      scoreClass:
+        type: "string"
+      scorePoints:
+        type: "integer"
+        format: "int32"
+      subScores:
+        type: "array"
+        items:
+          $ref: "#/definitions/ScoringAttribute"
+  LocalIndustryCode:
+    type: "object"
+    properties:
+      code:
+        type: "string"
+  DecisionResult:
+    type: "object"
+    properties:
+      additionalDecisionInfo:
+        type: "string"
+      decisionCode:
+        type: "string"
+      decisionDescription:
+        type: "string"
+      policyRules:
+        type: "array"
+        items:
+          $ref: "#/definitions/PolicyRule"
+  Employment:
+    type: "object"
+    properties:
+      contractType:
+        type: "string"
+      employmentEndDate:
+        type: "string"
+        format: "date-time"
+      employmentStatus:
+        type: "string"
+      internalEmployeeFlag:
+        type: "boolean"
+        default: false
+      occupation:
+        type: "string"
+  Asset:
+    type: "object"
+    properties:
+      brand:
+        type: "string"
+      category:
+        type: "string"
+      condition:
+        type: "string"
+      depreciationFactor:
+        type: "number"
+        format: "double"
+      description:
+        type: "string"
+      firstRegistrationDate:
+        type: "string"
+        format: "date-time"
+      licensePlate:
+        type: "string"
+      listPriceNet:
+        type: "number"
+        format: "double"
+      listPriceVat:
+        type: "number"
+        format: "double"
+      marketValue:
+        type: "number"
+        format: "double"
+      mileage:
+        type: "number"
+        format: "double"
+      model:
+        type: "string"
+      netBookValue:
+        type: "number"
+        format: "double"
+      residualValue:
+        type: "number"
+        format: "double"
+  Conditioning:
+    type: "object"
+    properties:
+      name:
+        type: "string"
+      type:
+        type: "string"
+      value:
+        type: "number"
+        format: "double"
+  AdditionalVariable:
+    type: "object"
+    properties:
+      name:
+        type: "string"
+      valueBoolean:
+        type: "boolean"
+        default: false
+      valueDateTime:
+        type: "string"
+        format: "date-time"
+      valueDouble:
+        type: "number"
+        format: "double"
+      valueLong:
+        type: "integer"
+        format: "int32"
+      valueString:
+        type: "string"
+  ScoringResult:
+    type: "object"
+    properties:
+      additionalVariables:
+        type: "array"
+        items:
+          $ref: "#/definitions/AdditionalVariable"
+      customerId:
+        type: "string"
+      decisionResult:
+        $ref: "#/definitions/DecisionResult"
+      pdResult:
+        $ref: "#/definitions/PDResult"
+      scoringDate:
+        type: "string"
+        format: "date-time"
+      scoringNumber:
+        type: "integer"
+        format: "int32"
+  ExternalDisclosure:
+    type: "object"
+    properties:
+      blackListInfoFlag:
+        type: "boolean"
+        default: false
+      centralBankInfoBPRFlag:
+        type: "boolean"
+        default: false
+      centralBankInfoFlag:
+        type: "boolean"
+        default: false
+      dowJonesFailCasesFlag:
+        type: "boolean"
+        default: false
+      externalCompanyScore:
+        type: "integer"
+        format: "int32"
+  GroupDisclosure:
+    type: "object"
+    properties:
+      relatedCompanies:
+        type: "array"
+        items:
+          $ref: "#/definitions/RelatedCompany"
+  PolicyRule:
+    type: "object"
+    properties:
+      policyRuleId:
+        type: "integer"
+        format: "int32"
+      policyRuleLabel:
+        type: "string"
+      policyRuleText:
+        type: "string"
+      policyRuleTriggered:
+        type: "string"
+      policyRuleType:
+        type: "string"
+  CdsPtCp:
+    type: "object"
+    properties:
+      applicationId:
+        type: "string"
+      applicationStatus:
+        type: "string"
+      asset:
+        $ref: "#/definitions/Asset"
+      businessPartners:
+        type: "array"
+        items:
+          $ref: "#/definitions/BusinessPartner"
+      contract:
+        $ref: "#/definitions/Contract"
+      disableAutomaticApproval:
+        type: "boolean"
+        default: false
+      legalEntity:
+        type: "string"
+      localcurrency:
+        type: "string"
+      previousDecisions:
+        type: "array"
+        items:
+          $ref: "#/definitions/PreviousDecision"
+      requestDate:
+        type: "string"
+        format: "date-time"
+      requestId:
+        type: "string"
+  Request:
+    type: "object"
+    properties:
+      __DecisionID__:
+        type: "string"
+        description: "Unique identifier representing the execution of the decision\
+          \ service operation. If it is not specified, it will be computed automatically."
+      applicationRequest:
+        $ref: "#/definitions/CdsPtCp"
+    description: "Request for the execution of the decision service operation. Contains\
+      \ notably the input parameters that are used for the execution."
+  Error:
+    type: "object"
+    properties:
+      code:
+        type: "string"
+      description:
+        type: "string"
+      details:
+        type: "array"
+        items:
+          type: "string"
+      type:
+        type: "string"
+  RestructuredContract:
+    type: "object"
+    properties:
+      code:
+        type: "string"
+      date:
+        type: "string"
+        format: "date-time"
+  InternDisclosure:
+    type: "object"
+    properties:
+      dateLastRejection:
+        type: "string"
+        format: "date-time"
+      delinquencyAmount:
+        type: "number"
+        format: "double"
+      deniedContractsDate:
+        type: "string"
+        format: "date-time"
+      deniedContractsFlag:
+        type: "boolean"
+        default: false
+      deniedContractsNumber:
+        type: "integer"
+        format: "int32"
+      exposure:
+        type: "number"
+        format: "double"
+      groupTotalBookValueOfActiveContracts:
+        type: "number"
+        format: "double"
+      groupTotalBookValueOfApprovedContracts:
+        type: "number"
+        format: "double"
+      groupTotalBookValueOfContractInApproval:
+        type: "number"
+        format: "double"
+      legalProcessFlag:
+        type: "boolean"
+        default: false
+      newCustomerFlag:
+        type: "boolean"
+        default: false
+      numberOfActiveContracts:
+        type: "number"
+        format: "double"
+      numberOfYearsCustomer:
+        type: "number"
+        format: "double"
+      numberRestructuredContracts:
+        type: "integer"
+        format: "int32"
+      paymentBehaviours:
+        type: "array"
+        items:
+          $ref: "#/definitions/PaymentBehavior"
+      proposalsInApproval:
+        type: "integer"
+        format: "int32"
+      restructuredContracts:
+        type: "array"
+        items:
+          $ref: "#/definitions/RestructuredContract"
+      totalBookValueOfActiveContracts:
+        type: "number"
+        format: "double"
+      totalBookValueOfApprovedContracts:
+        type: "number"
+        format: "double"
+      totalBookValueOfContractsInApproval:
+        type: "number"
+        format: "double"
+      totalBookValueOfNotYetActiveContracts:
+        type: "number"
+        format: "double"
+      totalBookValueOfTerminatedContracts:
+        type: "number"
+        format: "double"
+      unpaidInstallmentsFlag:
+        type: "boolean"
+        default: false
+  Response:
+    type: "object"
+    properties:
+      scoringId:
+        type: "string"
+      scoringResult:
+        type: "array"
+        items:
+          $ref: "#/definitions/ScoringResult"
+  IndividualDisclosure:
+    type: "object"
+    properties:
+      birthdate:
+        type: "string"
+        format: "date-time"
+      businessExperienceSince:
+        type: "string"
+        format: "date-time"
+      cashflow:
+        type: "number"
+        format: "double"
+      citizenship:
+        type: "string"
+      debtServiceToIncome:
+        type: "number"
+        format: "double"
+      debtServiceToIncomeAdditionalInfoFlag:
+        type: "boolean"
+        default: false
+      declaredIncomeDomesticFlag:
+        type: "boolean"
+        default: false
+      employments:
+        type: "array"
+        items:
+          $ref: "#/definitions/Employment"
+      expenses:
+        type: "number"
+        format: "double"
+      firstName:
+        type: "string"
+      gender:
+        type: "string"
+      income:
+        type: "number"
+        format: "double"
+      lastName:
+        type: "string"
+      maritalStatus:
+        type: "string"
+      middleName:
+        type: "string"
+      numberOfFamilyMembers:
+        type: "integer"
+        format: "int32"
+  CompanyDisclosure:
+    type: "object"
+    properties:
+      annualBalanceDate:
+        type: "string"
+        format: "date-time"
+      annualSales:
+        type: "number"
+        format: "double"
+      balanceSheetAvailable:
+        type: "boolean"
+        default: false
+      cash:
+        type: "number"
+        format: "double"
+      cashflow:
+        type: "number"
+        format: "double"
+      companyId:
+        type: "string"
+      currentAssets:
+        type: "number"
+        format: "double"
+      currentRatio:
+        type: "number"
+        format: "double"
+      depreciations:
+        type: "number"
+        format: "double"
+      equityRatio:
+        type: "number"
+        format: "double"
+      formationDate:
+        type: "string"
+        format: "date-time"
+      immobilizedAssets:
+        type: "number"
+        format: "double"
+      lastBalanceEntryDate:
+        type: "string"
+        format: "date-time"
+      localIndustryCodes:
+        type: "array"
+        items:
+          $ref: "#/definitions/LocalIndustryCode"
+      longTermLiabilities:
+        type: "number"
+        format: "double"
+      operatingResult:
+        type: "number"
+        format: "double"
+      preliminaryBalanceDate:
+        type: "string"
+        format: "date-time"
+      shareholderNationality:
+        type: "string"
+      shortTermLiabilities:
+        type: "number"
+        format: "double"
+      shortTermProvisions:
+        type: "number"
+        format: "double"
+      totalAssets:
+        type: "number"
+        format: "double"
+  PaymentBehavior:
+    type: "object"
+    properties:
+      paymentBehaviourRating:
+        type: "string"
+  Contract:
+    type: "object"
+    properties:
+      accountingCenter:
+        type: "string"
+      additionalFinancialItems:
+        type: "number"
+        format: "double"
+      amountFinanced:
+        type: "number"
+        format: "double"
+      balloonRV:
+        type: "number"
+        format: "double"
+      contractEndDate:
+        type: "string"
+        format: "date-time"
+      customerDepositNet:
+        type: "number"
+        format: "double"
+      dealerId:
+        type: "string"
+      downPayment:
+        type: "number"
+        format: "double"
+      feesSubsidiesUpfront:
+        type: "number"
+        format: "double"
+      financialProductCode:
+        type: "string"
+      initialDirectCost:
+        type: "number"
+        format: "double"
+      installment:
+        type: "number"
+        format: "double"
+      interestRate:
+        type: "number"
+        format: "double"
+      investment:
+        type: "number"
+        format: "double"
+      productMarketing:
+        type: "string"
+      productNumber:
+        type: "string"
+      refinancingFlag:
+        type: "boolean"
+        default: false
+      salesPrice:
+        type: "number"
+        format: "double"
+      securityDeposit:
+        type: "number"
+        format: "double"
+      serviceType:
+        type: "string"
+      term:
+        type: "number"
+        format: "double"
+      typeOfGovernmentalBusiness:
+        type: "string"
+  ScoringAttribute:
+    type: "object"
+    properties:
+      characteristicId:
+        type: "string"
+      characteristicPoints:
+        type: "integer"
+        format: "int32"
+      characteristicValue:
+        type: "string"
