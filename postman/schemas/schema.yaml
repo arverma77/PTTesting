@@ -450,7 +450,7 @@ definitions:
         type: "array"
         items:
           $ref: "#/definitions/ScoringResult"
-  IndividualDisclosure:
+  IndividualDisclosureNew:
     type: "object"
     properties:
       birthdate:
