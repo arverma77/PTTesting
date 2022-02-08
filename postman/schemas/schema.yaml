@@ -108,7 +108,7 @@ definitions:
         $ref: "#/definitions/CompanyDisclosure"
       customerCategory:
         type: "string"
-      customerId:
+      customerIdArti:
         type: "string"
       externDisclosure:
         $ref: "#/definitions/ExternalDisclosure"
@@ -253,7 +253,7 @@ definitions:
         type: "array"
         items:
           $ref: "#/definitions/AdditionalVariable"
-      customerId:
+      customerIdArti:
         type: "string"
       decisionResult:
         $ref: "#/definitions/DecisionResult"
